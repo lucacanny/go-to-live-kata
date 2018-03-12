@@ -26,3 +26,23 @@ You will need to:
 5. We are evaluating solutions based on the architecture and quality of the deployment. Show us just how beautiful, clean and pragmatic your code can be.
 
 6. Once your solution is ready, please send us the link of your project.
+
+Lamp Stack
+==========
+
+This project build a simple server based on Ubuntu 14.04 using Vagrant and Virtualbox
+
+Requirements
+============
+
+-   Vagrant 2.0.2
+-   Virtualbox 5.2.8r121009
+
+HowTo start
+===========
+
+Create the virtual machine:
+
+``` {.bash org-language="sh"}
+vagrant up
+```
