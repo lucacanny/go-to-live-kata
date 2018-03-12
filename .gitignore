@@ -1,5 +1,9 @@
-helloworld.sqlite
-*.pyc
+# Ignore temporary files
+*~
+._*
+*.DS_Store
+\#*#
+*.retry
 
-.idea
-.DS_Store
+# Ignore .vagrant folder
+.vagrant
