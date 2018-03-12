@@ -1,0 +1,25 @@
+---
+- hosts: default
+
+# Install python2.7
+  tasks:
+
+    - name: Verify required variables
+      fail: msg="Variable '{{ item }}' is not defined"
+      when: item not in vars
+      with_items:
+         - wp_version
+         - hostname
+
+    - name: install python 2, if needed
+      become: yes
+      gather_facts: no
+      raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+      changed_when: no
+
+    - name: Update and upgrade apt packages
+      become: true
+      apt:
+        upgrade: yes
+        update_cache: yes
+        cache_valid_time: 86400 #One day    
