@@ -37,6 +37,7 @@ Requirements
 
 -   Vagrant 2.0.2
 -   Virtualbox 5.2.8r121009
+-   Ansible 2.4.3.0
 
 HowTo start
 ===========
