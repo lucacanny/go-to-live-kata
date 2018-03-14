@@ -37,4 +37,10 @@
         priv: "wordpress_db.*:ALL"
         host: localhost
         state: present
-        #check_implicit_admin: true        
+        #check_implicit_admin: true      
+
+    - name: Download WordPress
+      get_url: url=http://wordpress.org/wordpress-{{ wp_version }}.tar.gz dest=/tmp/wordpress-{{ wp_version }}.tar.gz
+
+    - name: Extract archive
+      command: chdir=/var/www/html/ /bin/tar xvf /tmp/wordpress-{{ wp_version }}.tar.gz  

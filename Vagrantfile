@@ -3,7 +3,7 @@
 
 # Variables
   vm_name = "wp-server"
-  wp_version = "v0.0"
+  wp_version = "4.9.4"
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
