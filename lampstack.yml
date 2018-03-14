@@ -12,7 +12,8 @@
       apt: name={{item}} state=present
       with_items:
         - mysql-server
-        - php5-mysql 
+        - php5-mysql
+        - python-mysqldb
 
     - name: Install PHP packages
       apt: name={{item}} state=present
@@ -20,3 +21,20 @@
         - php5
         - libapache2-mod-php5
         - php5-mcrypt
+
+    - name: Create a new database with name wordpress_db
+      mysql_db:
+        name: wordpress_db
+        state: present
+        
+    - name: Create WordPress database user
+      mysql_user:
+        #login_user: root
+        #login_password: "{{ mysql_root_db_password }}"
+        #login_password: password
+        name: wordpress
+        password: Pa55w0rd
+        priv: "wordpress_db.*:ALL"
+        host: localhost
+        state: present
+        #check_implicit_admin: true        
