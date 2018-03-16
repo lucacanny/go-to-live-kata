@@ -10,10 +10,12 @@
       with_items:
          - wp_version
          - hostname
+         - db_name
+         - mysql_user
+         - site_name
 
     - name: install python 2, if needed
       become: yes
-      gather_facts: no
       raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
       changed_when: no
 

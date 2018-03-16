@@ -1,9 +1,16 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+require 'yaml'
+current_dir = File.dirname(File.expand_path(__FILE__))
+configs = YAML.load_file("#{current_dir}/config.yaml")
 # Variables
-  vm_name = "wp-server"
-  wp_version = "4.9.4"
+  vm_name = configs['server']['vm_name']
+  wp_version = configs['wordpress']['version']
+  db_name = configs ['mysql']['db_name']
+  mysql_user = configs ['mysql']['mysql_user']
+  site_name = configs ['wordpress']['site_name']
+
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
@@ -70,10 +77,13 @@ Vagrant.configure("2") do |config|
   config.vm.provision :ansible do |ansible|
         ansible.host_key_checking = false
         ansible.playbook = "main.yml"
-        ansible.verbose = ""
+        ansible.verbose = configs['ansible']['verbosity']
         ansible.extra_vars = {
             wp_version: wp_version,
-            hostname: vm_name
+            hostname: vm_name,
+            db_name: db_name,
+            mysql_user: mysql_user,
+            site_name: site_name
         }
    end
 end
