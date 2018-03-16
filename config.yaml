@@ -6,10 +6,11 @@ server:
 mysql:
   db_name: '{{ site_name }}_db'
   mysql_user: 'wordpress'
+  mysql_password: 'password'
 
 wordpress:
   version: '4.9.4'
   site_name: 'wordpress'
 
 ansible:
-  verbosity: 'vvv'
+  verbosity: 'v'

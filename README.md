@@ -1,32 +1,3 @@
-Go to live! kata
-==================================
-
-Contained in this repo, there are some instructions for a new application that will go live in the next month!
-
-You will need to:
-
-1. Fork this repository.
-
-2. Automate the creation of the infrastructure and the setup of the application.
-
-   You have only these instructions:
-
-   2.1 It works on Ubuntu Linux 14.04 x64
-
-   2.2 It's based on the last version of WordPress (it will be more useful if we can parameterize the version)
-
-   2.3 You can choose Apache, Nginx or whatever you want
-
-   For any other issues or question you will have to ask to the developers. In this case please ask us without problems :)
-
-3. Once deployed, the application should be secure, fast and stable. Assume that the machine is running on the public Internet and should be hardened and locked down.
-
-4. Make any assumptions that you need to. This is an opportunity to showcase your skills, so if you want to, implement the deployment process with any additional features, tools or techniques you'd like to.
-
-5. We are evaluating solutions based on the architecture and quality of the deployment. Show us just how beautiful, clean and pragmatic your code can be.
-
-6. Once your solution is ready, please send us the link of your project.
-
 Lamp Stack
 ==========
 
@@ -42,8 +13,33 @@ Requirements
 HowTo start
 ===========
 
+
+``` {.bash org-language="sh"}
+$ git clone https://github.com/lucacanny/go-to-live-kata.git
+$ cd go-to-live-kata
+```
+
+The configuration can be customized using the config file.
+
 Create the virtual machine:
 
 ``` {.bash org-language="sh"}
-vagrant up
+$ vagrant up
+```
+
+Once the process is finished you can connect to the wordpress site from the following url:
+
+[WordPress](http://192.168.33.20/wordpress) - 
+For convenience it has been configured with static ip
+
+**Optional:** you can add the next rule to your host file and go to http://mywordpress.local
+
+``` {.bash org-language="sh"}
+192.168.33.20     mywordpress.local
+```
+
+use this command line to add the rule:
+
+``` {.bash org-language="sh"}
+$ echo "\n192.168.33.20     mywordpress.local" | sudo tee -a /etc/hosts
 ```

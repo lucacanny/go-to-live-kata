@@ -10,6 +10,7 @@ configs = YAML.load_file("#{current_dir}/config.yaml")
   db_name = configs ['mysql']['db_name']
   mysql_user = configs ['mysql']['mysql_user']
   site_name = configs ['wordpress']['site_name']
+  mysql_password = configs ['mysql']['mysql_password']
 
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
@@ -65,7 +66,7 @@ Vagrant.configure("2") do |config|
   #   vb.gui = true
   #
      # Customize the amount of memory on the VM:
-     vb.memory = "1024"
+     vb.memory = "2048"
   end
   #
   # View the documentation for the provider you are using for more
@@ -76,6 +77,9 @@ Vagrant.configure("2") do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision :ansible do |ansible|
         ansible.host_key_checking = false
+        #ansible.ask_vault_pass = true
+        #ansible.raw_arguments = --ask-vault-pass
+        #ansible.raw_arguments = ["--vault-id", "@vault"]
         ansible.playbook = "main.yml"
         ansible.verbose = configs['ansible']['verbosity']
         ansible.extra_vars = {
@@ -83,6 +87,7 @@ Vagrant.configure("2") do |config|
             hostname: vm_name,
             db_name: db_name,
             mysql_user: mysql_user,
+            mysql_password: mysql_password,
             site_name: site_name
         }
    end
