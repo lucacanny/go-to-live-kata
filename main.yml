@@ -1,7 +1,6 @@
 ---
 - hosts: default
 
-# Install python2.7
   tasks:
 
     - name: Verify required variables
@@ -24,6 +23,31 @@
       apt:
         upgrade: yes
         update_cache: yes
-        cache_valid_time: 86400 #One day    
+        cache_valid_time: 86400 #One day
+
+    - name: Get iptables rules
+      become: yes
+      shell: iptables -L
+      register: iptablesrules
+     
+    - name: Apache | add apache iptable rule
+      become: yes
+      command: /sbin/iptables -I INPUT 1 -p tcp --dport http -j ACCEPT -m comment --comment "Apache"
+      when: iptablesrules.stdout.find("Apache") == -1
+
+    - name: ssh | add ssh iptable rule
+      become: yes
+      command: /sbin/iptables -I INPUT 1 -p tcp --dport ssh -j ACCEPT -m comment --comment "ssh"
+      when: iptablesrules.stdout.find("ssh") == -1  
+     
+    - name: save iptables
+      become: yes
+      command: iptables-save
+     
+    - name: restart iptables
+      become: yes
+      service: 
+        name: ufw 
+        state: restarted    
 
 - import_playbook: lampstack.yml
