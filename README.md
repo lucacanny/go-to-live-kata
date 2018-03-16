@@ -31,15 +31,3 @@ Once the process is finished you can connect to the wordpress site from the foll
 
 [WordPress](http://192.168.33.20/wordpress) - 
 For convenience it has been configured with static ip
-
-**Optional:** you can add the next rule to your host file and go to http://mywordpress.local
-
-``` {.bash org-language="sh"}
-192.168.33.20     mywordpress.local
-```
-
-use this command line to add the rule:
-
-``` {.bash org-language="sh"}
-$ echo "\n192.168.33.20     mywordpress.local" | sudo tee -a /etc/hosts
-```
